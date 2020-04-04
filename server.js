@@ -37,10 +37,23 @@ app.post("/create", async (req, res) => {
     }
 });
 
-// find all movie route
+// find all
 app.get("/findAll", async (req, res) => {
     try {
         const movies = await Movie.find();
+        res.json({
+            movies,
+        });
+    } catch (err) {
+        res.json({
+            message: "no movies",
+        });
+    }
+});
+
+app.get("/findMovies", async (req, res) => {
+    try {
+        const movies = await Movie.find({ category: "movies" });
         res.json({
             movies,
         });
